@@ -287,7 +287,7 @@ export function PaymentForm({ snapshot, payment }: { snapshot: GroupSnapshot; pa
             <div className="flex gap-2">
               <select
                 aria-label="通貨"
-                className={cx(INPUT_CLASS, "w-[6.5rem] shrink-0 px-3 font-bold")}
+                className="min-h-12 w-28 shrink-0 rounded-2xl border border-line bg-surface px-3 text-base font-bold text-ink focus:border-accent focus:outline-none"
                 value={currency}
                 onChange={(e) => changeCurrency(e.target.value)}
               >
@@ -310,7 +310,7 @@ export function PaymentForm({ snapshot, payment }: { snapshot: GroupSnapshot; pa
               </select>
               <input
                 id={`${formId}-amount`}
-                className={cx(INPUT_CLASS, "tabular text-right text-xl font-black")}
+                className={cx(INPUT_CLASS, "tabular min-w-0 flex-1 text-right text-xl font-black")}
                 inputMode={digits === 0 ? "numeric" : "decimal"}
                 placeholder={digits === 0 ? "0" : `0.${"0".repeat(digits)}`}
                 value={amount}
