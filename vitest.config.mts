@@ -9,8 +9,8 @@ export default defineConfig({
     },
   },
   test: {
-    // Playwright のテスト（e2e/）は Vitest では動かさない
-    include: ["lib/**/*.test.ts"],
+    // Playwright のテスト（e2e/）は Vitest では動かさない。supabase/tests は PGlite で SQL を確かめる
+    include: ["lib/**/*.test.ts", "supabase/tests/**/*.test.ts"],
     environment: "node",
   },
 });
