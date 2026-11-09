@@ -1,7 +1,14 @@
+import type { Metadata } from "next";
+
 import { CreateGroupForm } from "@/components/create-group-form";
 import { RecentGroups } from "@/components/recent-groups";
 import { SiteFooter } from "@/components/site-footer";
 import { Card, Logo } from "@/components/ui";
+
+// 検索結果で正規の URL として扱ってもらう
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 /**
  * トップページ: アプリの説明と、グループ作成フォーム
