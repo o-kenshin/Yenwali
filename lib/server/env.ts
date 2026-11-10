@@ -34,7 +34,23 @@ export function getSupabaseServerConfig(): { url: string; secretKey: string } {
     throw new Error("NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SECRET_KEY must be set");
   }
 
-  return { url, secretKey };
+  // よくある間違い: ダッシュボードのアドレス（https://supabase.com/dashboard/project/xxx）を入れてしまう
+  // 正しいのは https://xxx.supabase.co（パスなし）
+  let parsed: URL;
+
+  try {
+    parsed = new URL(url.trim());
+  } catch {
+    throw new Error(`NEXT_PUBLIC_SUPABASE_URL is not a valid URL: "${url}"`);
+  }
+
+  if (parsed.hostname === "supabase.com" || parsed.pathname.replace(/\/+$/, "") !== "") {
+    throw new Error(
+      `NEXT_PUBLIC_SUPABASE_URL must be the project URL like https://<ref>.supabase.co (got "${url}")`,
+    );
+  }
+
+  return { url: parsed.origin, secretKey: secretKey.trim() };
 }
 
 /** 為替 API を叩かず固定のレートを返すか（E2E テスト用） */
